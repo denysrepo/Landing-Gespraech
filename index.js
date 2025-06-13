@@ -75,6 +75,11 @@ app.post('/api/brevo', async (req, res) => {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
+    if (process.env.NODE_ENV === 'test' || process.env.BREVO_MOCK) {
+      console.log('Brevo mock request - skipping external call');
+      return res.json({ success: true, mock: true });
+    }
+
     // Proxy request to Brevo API
     const brevoResponse = await fetch('https://api.brevo.com/v3/contacts', {
       method: 'POST',
@@ -119,11 +124,15 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'gsprach 2', 'index.html'));
 });
 
-// Start server
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`G-Sprach Landing server running on port ${PORT}`);
-  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`Brevo API Key configured: ${!!process.env.BREVO_KEY}`);
-  console.log(`Stripe Secret Key configured: ${!!process.env.STRIPE_SK}`);
-});
+// Start server when run directly
+if (require.main === module) {
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`G-Sprach Landing server running on port ${PORT}`);
+    console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`Brevo API Key configured: ${!!process.env.BREVO_KEY}`);
+    console.log(`Stripe Secret Key configured: ${!!process.env.STRIPE_SK}`);
+  });
+}
+
+module.exports = app;
 
