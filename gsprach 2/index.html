@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>G-Spräch | Подкаст-студія під Берліном</title>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <link rel="stylesheet" href="https://unpkg.com/swiper@9/swiper-bundle.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  
+  <style>
+    :root{
+  --green:#8BC34A;--dark:#1a1a1a;--bg:#0e0e0e;
+  --radius:16px;font-family:Inter,Arial,sans-serif;color:#fff;
+    html {scroll-behavior: smooth};
+    }
+    
+    /* Стили для нового хедера (Навигации) */
+    .main-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        background: rgba(26, 26, 26, 0.8);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        transition: background 0.3s ease;
+    }
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        height: 70px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+}
+    .nav-logo{
+  font-weight:700;
+  font-size:22px;
+  color: #8BC34A;           /* заливка текста */
+  
+    }
+    .nav-links ul {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        gap: 35px;
+    }
+    .nav-links a {
+        color: #e0e0e0;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+    .nav-links a:hover {
+        color: #8BC34A;
+    }
+    .nav-cta {
+        background-color: #8BC34A;
+        color: #1a1a1a;
+        padding: 10px 20px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 700;
+        transition: all 0.3s ease;
+    }
+    .nav-cta:hover {
+        background-color: #a1d86a;
+        transform: translateY(-2px);
+    }
+    /* Скрытие навигации на мобильных (позже можно добавить JS для меню-бургера) */
+    @media (max-width: 768px) {
+        .nav-links, .nav-cta {
+            display: none;
+        }
+    }
+
+    /* Центрирование контента в Hero секции */
+    .hero-overlay {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+/* ===== базова сітка (десктоп) ===== */
+.booking-form{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--radius);padding:40px;display:grid;grid-template-columns:1fr 1fr;
+  gap:25px}
+.form-group{display:flex;flex-direction:column}
+.form-group.full-width{grid-column:1/-1}
+.booking-form input,select,textarea{background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.2);
+  color:#fff;border-radius:8px;padding:14px;font:inherit}
+.booking-form input:focus,select:focus,textarea:focus{border-color:var(--green);outline:none}
+.checkbox-group{grid-column:1/-1;display:flex;align-items:center;gap:10px;font-size:14px}
+.checkbox-group input{accent-color:var(--green)}
+.form-submit{grid-column:1/-1;background:var(--green);color:var(--dark);font-weight:700;
+  padding:18px;border:none;border-radius:8px;font-size:18px}
+.form-submit:hover{background:#a1d86a;cursor:pointer}
+    
+   
+}
+    
+    .booking-form .checkbox input {
+        width: auto;
+    }
+    .form-submit {
+        background-color: #8BC34A;
+        color: #1a1a1a;
+        font-weight: 700;
+        font-size: 18px;
+        padding: 18px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    .form-submit:hover {
+        background-color: #a1d86a;
+        transform: translateY(-2px);
+    }
+
+    /* Стили для футера */
+    .professional-footer {
+        background-color: #1a1a1a;
+        color: rgba(255, 255, 255, 0.7);
+        padding: 60px 0 20px 0;
+        font-size: 15px;
+    }
+    .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 40px;
+    }
+    .footer-column h4 {
+        color: #ffffff;
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+    .footer-column p, .footer-column li {
+        margin-bottom: 10px;
+    }
+    .footer-column ul {
+        list-style: none;
+        padding: 0;
+    }
+    .footer-column a {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    .footer-column a:hover {
+        color: #8BC34A;
+    }
+    .footer-bottom {
+        max-width: 1200px;
+        margin: 40px auto 0 auto;
+        padding: 20px 20px 0 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    .footer-legal a {
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.5);
+        margin-left: 15px;
+        transition: color 0.3s ease;
+    }
+    .footer-legal a:hover {
+        color: #ffffff;
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- Preloader -->
+    <div id="preloader" class="preloader">
+        <div class="preloader-content">
+            <svg class="microphone-icon" width="60" height="60" viewBox="0 0 60 60">
+                <path d="M30 5 C25 5 21 9 21 14 L21 26 C21 31 25 35 30 35 C35 35 39 31 39 26 L39 14 C39 9 35 5 30 5 Z" 
+                      fill="none" stroke="#BBC34A" stroke-width="2"/>
+                <path d="M15 22 C15 22 15 30 15 30 C15 38 22 45 30 45 C38 45 45 38 45 30 L45 22" 
+                      fill="none" stroke="#BBC34A" stroke-width="2"/>
+                <line x1="30" y1="45" x2="30" y2="55" stroke="#BBC34A" stroke-width="2"/>
+                <line x1="20" y1="55" x2="40" y2="55" stroke="#BBC34A" stroke-width="2"/>
+            </svg>
+            <div class="pulse-ring"></div>
+        </div>
+    </div>
+
+<nav class="main-nav">
+    <div class="nav-container">
+        <div class="nav-logo">
+            <span>G-Spräch</span>
+            </div>
+        <div class="nav-links">
+            <ul>
+                <li><a href="#gallery">Студія</a></li>
+                <li><a href="#pricing">Пакети</a></li>
+                <li><a href="#process">Процес</a></li>
+            </ul>
+        </div>
+        <a href="#contact" class="nav-cta">Забронювати</a>
+    </div>
+</nav>
+
+
+
+<header class="hero">
+  <video class="hero-video" autoplay muted loop playsinline src="videos/hero.mp4"></video>
+  <div class="hero-overlay">
+    <h1>Ваша ідея — наша реалізація</h1>
+    <p>Подкаст студія 40 хвилин від Берліна / уся техніка та команда включені</p>
+    </div>
+</header>
+
+<section id="gallery" class="gallery">
+  <div class="container">
+    <h2 class="section-title">Твоя Подкаст Студія</h2>
+    <div class="swiper studio-swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="images/studio-1.jpg" alt=""></div>
+        <div class="swiper-slide"><img src="images/studio-2.jpg" alt=""></div>
+        <div class="swiper-slide"><img src="images/studio-3.jpg" alt=""></div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+</section>
+
+<section id="forwhom" class="for-whom">
+  <div class="container">
+    <h2 class="section-title">Для кого наша студія?</h2>
+    <div class="cards-grid">
+
+      <div class="service-card">
+        <h3>Бізнес</h3>
+        <p>Ваш продукт чудовий, команда — професіонали. Але клієнти йдуть до тих,
+           хто голосніше про себе заявляє.</p>
+      </div>
+
+      <div class="service-card">
+        <h3>Блогери</h3>
+        <p>Немає часу шукати студію та розбиратись у монтажі? Приходьте — усе готово,
+           а ми подбаємо про технічну магію.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="match">
+  <div class="container">
+    <h2 class="section-title">Тоді це матч!</h2>
+  </div>
+</section>
+
+<section id="pricing" class="pricing">
+  <div class="container">
+    <h2 class="section-title">Ми пропонуємо</h2>
+
+    <div class="pricing-grid">
+
+      <div class="pricing-card">
+        <h3>Пакет «Podcast»</h3>
+        <p class="price">750 €</p>
+        <ul>
+          <li>Студія + 3 камери Sony</li>
+          <li>Мікрофони Shure + Mixcast</li>
+          <li>Монтаж та кольорокорекція</li>
+        </ul>
+        <button class="pricing-btn stripe-pay" data-price="price_podcast">Обрати</button>
+      </div>
+
+      <div class="pricing-card featured">
+        <h3>Пакет «Business»</h3>
+        <p class="price">1 800 €</p>
+        <ul>
+          <li>Зйомка у вашій локації</li>
+          <li>Дрон-відео</li>
+          <li>Асистент + монтаж</li>
+        </ul>
+        <button class="pricing-btn stripe-pay" data-price="price_business">Обрати</button>
+      </div>
+
+      <div class="pricing-card">
+        <h3>Пакет «YouTube Start»</h3>
+        <p class="price">950 €</p>
+        <ul>
+          <li>Все з «Podcast»</li>
+          <li>Налаштування каналу</li>
+          <li>Shorts, обкладинки, банер</li>
+        </ul>
+        <button class="pricing-btn stripe-pay" data-price="price_youtube">Обрати</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="process" class="process">
+  <div class="container">
+    <h2 class="section-title">Лише 3 кроки</h2>
+    <div class="process-timeline">
+      <div class="process-step">
+        🗓️ <b>1. Забронюйте час</b><br>Онлайн за 2 хвилини
+      </div>
+      <div class="process-arrow">→</div>
+      <div class="process-step">
+        🎙️ <b>2. Запишіться</b><br>Обладнання й команда вже чекають
+      </div>
+      <div class="process-arrow">→</div>
+      <div class="process-step">
+        📁 <b>3. Готове відео за 2-3 дні</b><br>Експрес — також можливо
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="final-cta">
+  <div class="container">
+    <h2 class="section-title">Залиште заявку</h2>
+    
+    <form id="bookingForm" action="#" method="post" class="booking-form">
+      <input  name="name" placeholder="Ім'я*" required>
+      <input  name="phone" placeholder="Телефон*" required>
+      <input  name="email" type="email" placeholder="E-mail*">
+      <input id="datetime" name="datetime"
+       type="text"
+       placeholder="Бажана дата та час*" required>
+      <select name="package" required>
+        <option value="" disabled selected>Оберіть пакет*</option>
+        <option value="Podcast">Пакет «Podcast»</option>
+        <option value="Business">Пакет «Business»</option>
+        <option value="YouTube Start">Пакет «YouTube Start»</option>
+      </select>
+     <label class="checkbox">
+    <input type="checkbox" name="optin" value="true" required>
+        Я погоджуюсь на обробку даних…
+    </label>
+      <button type="submit" class="form-submit">Відправити заявку</button>
+    </form>
+  </div>
+</section>
+
+<section class="map">
+  <div class="container">
+    <h2 class="section-title">Ми під Берліном!</h2>
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2454.21253457221!2d13.00791231572188!3d52.00330697971984!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a650755b555555%3A0x6b4f7a9d7b4a2d0!2sMarkt%2015-16%2C%2014913%20J%C3%BCterbog!5e0!3m2!1sen!2sde!4v1689531315891!5m2!1sen!2sde"
+      width="100%" height="350" style="border:0; border-radius: 16px;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+</section>
+
+<footer class="professional-footer">
+  <div class="footer-container">
+      <div class="footer-column">
+          <h4>G-Spräch Studio</h4>
+          <p>Професійна студія для створення контенту, що завойовує довіру та будує ваш бренд.</p>
+      </div>
+      <div class="footer-column">
+          <h4>Навігація</h4>
+          <ul>
+              <li><a href="#gallery">Галерея</a></li>
+              <li><a href="#forwhom">Для кого</a></li>
+              <li><a href="#pricing">Пакети</a></li>
+              <li><a href="#contact">Контакти</a></li>
+          </ul>
+      </div>
+      <div class="footer-column">
+          <h4>Контакти</h4>
+          <p>Markt 15-16, 14913 Jüterbog</p>
+          <p><a href="tel:+4917655774567">+49 176 55774567</a></p>
+          <p><a href="mailto:info@g-spraech.com">info@g-spraech.com</a></p>
+      </div>
+      <div class="footer-column">
+          <h4>Слідкуйте</h4>
+          <ul>
+              <li><a href="#" target="_blank">Instagram</a></li>
+              <li><a href="#" target="_blank">YouTube</a></li>
+              <li><a href="#" target="_blank">LinkedIn</a></li>
+          </ul>
+      </div>
+  </div>
+  <div class="footer-bottom">
+      <p>© 2025 G-Spräch Studio</p>
+      <div class="footer-legal">
+          <a href="#">Impressum</a>
+          <a href="#">Datenschutz</a>
+      </div>
+  </div>
+</footer>
+
+
+<script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://js.stripe.com/v3"></script>
+<script src="script.js"></script>
+</body>
+</html>
